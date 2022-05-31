@@ -2,10 +2,15 @@ package com.example.aplikacja6;
 
 //https://stackoverflow.com/questions/12763104/move-a-ball-with-accelerometer-android
 //https://stackoverflow.com/questions/6479637/android-accelerometer-moving-ball
+//https://xiangchen.wordpress.com/2011/12/17/an-android-accelerometer-example/
+//https://stackoverflow.com/questions/14882045/move-ball-around-screen-accelerometer-bounce-too
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,9 +18,12 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    //private Bitmap mBitmap;
 
     private SensorManager sensorManager;
     private Sensor acceleometer;
@@ -112,4 +120,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onResume();
         turnOn(SensorManager.SENSOR_DELAY_NORMAL);
     }
+
+    /*
+    public class CustomDrawableView extends View {
+        public CustomDrawableView(Context context) {
+            super(context);
+            Bitmap ball = BitmapFactory.decodeResource(getResources(),
+                    R.drawable.ball);
+            final int dstWidth = 50;
+            final int dstHeight = 50;
+            mBitmap = Bitmap
+                    .createScaledBitmap(ball, dstWidth, dstHeight, true);
+            //mWood = BitmapFactory.decodeResource(getResources(), R.drawable.wood);
+
+        }
+
+        protected void onDraw(Canvas canvas) {
+            final Bitmap bitmap = mBitmap;
+            //canvas.drawBitmap(mWood, 0, 0, null);
+            canvas.drawBitmap(bitmap, x, y, null);
+            invalidate();
+        }
+    }
+    */
+    
 }
