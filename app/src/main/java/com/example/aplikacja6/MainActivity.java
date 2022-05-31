@@ -22,8 +22,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private ImageView ball;
 
-    int xa=-50;
-    int ya=-50;
+    int xa= 0;
+    int ya= 0;
+
+    int x= 0;
+    int y= 0;
 
     int xmax;
     int ymax;
@@ -49,6 +52,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         acceleometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        turnOn(SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+
+    void turnOn(int mode){
+        if (acceleometer != null) {
+            sensorManager.registerListener(this, acceleometer, mode);
+        }
+    }
+
+    public void updateBallPosition(){
+        ball.setX(x);
+        ball.setX(y);
     }
 
     @Override
@@ -58,7 +74,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             Log.i("pozycja X:", String.valueOf(sensorEvent.values[0]));
             Log.i("pozycja Y:", String.valueOf(sensorEvent.values[1]));
-            Log.i("pozycja Z:", String.valueOf(sensorEvent.values[2]));
+
+            if(sensorEvent.values[0] > 0 && x < xmax){
+                x++;
+                //updateBallPosition();
+            }else if(sensorEvent.values[0] < 0 && x > 0){
+                x--;
+                //updateBallPosition();
+            }
+
+            if(sensorEvent.values[1] > 0 && y < ymax){
+                y++;
+               // updateBallPosition();
+            }else if(sensorEvent.values[1] < 0 && y > 0){
+                y--;
+                //updateBallPosition();
+            }
+
         }
 
 
@@ -67,5 +99,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
