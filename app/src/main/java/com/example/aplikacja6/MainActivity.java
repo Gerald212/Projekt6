@@ -11,19 +11,30 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor acceleometer;
 
+    private ImageView ball;
+
+    int xa=0;
+    int ya=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ball = (ImageView) findViewById(R.id.ball);
+        ball.setImageResource(R.drawable.ball);
+        ball.scrollTo(xa, ya);
+
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         acceleometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
     }
 
     @Override
