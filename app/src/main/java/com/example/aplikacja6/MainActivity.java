@@ -77,18 +77,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             if(sensorEvent.values[0] > 0 && x < xmax){
                 x++;
-                //updateBallPosition();
+                updateBallPosition();
             }else if(sensorEvent.values[0] < 0 && x > 0){
                 x--;
-                //updateBallPosition();
+                updateBallPosition();
             }
 
             if(sensorEvent.values[1] > 0 && y < ymax){
                 y++;
-               // updateBallPosition();
+                updateBallPosition();
             }else if(sensorEvent.values[1] < 0 && y > 0){
                 y--;
-                //updateBallPosition();
+                updateBallPosition();
             }
 
         }
@@ -110,5 +110,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
+        turnOn(SensorManager.SENSOR_DELAY_NORMAL);
     }
 }
